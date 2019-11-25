@@ -1,26 +1,16 @@
-// require("dotenv").config();
-// var keys = require("./keys.js");
+require("dotenv").config();
+var keys = require("./keys.js");
 // var spotify = new Spotify(keys.spotify);
 const fs = require('fs');
 const axios = require('axios');
 var Spotify = require('node-spotify-api');
+var moment = require('moment');
+moment().format();
 
 var spotify = new Spotify({
-    id: '58a3bd2921e945bfb6032a2074c0eda8',
-    secret: 'ddb3373eae96448cbe0fd7c6fdde9dbc'
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
 });
-
-
-// let command= process.argv[2]
-// let query= process.agrv[3]
-// let a = "momma said \"I can't\""
-// let b = 'momma said "I can\'t"'
-// let c = `momma said "I can't"`
-
-// let faves = ["deerhoof", "the slip", "taylor swift"]
-
-// faves.forEach(band => console.log(`${band} is my favorite.
-// they have ${band.length} letters in their name`))// ${} expands variables inside a template literal
 
 let [, , command] = process.argv //array destructuring
 let query = process.argv.slice(3).join(" ")
@@ -48,27 +38,27 @@ switch (command) {
 // }
 
 function concertThis() {
-    console.log("conerting")
-
+    const url = "https://rest.bandsintown.com/artists/celine+dion/events?app_id=codingbootcamp"
+    axios.get(url).then(res => {
+        console.log(res.data[0].venue.city);
+        console.log(res.data[0].venue.name);
+        console.log(res.data[0].datetime);
+    });
 }
 
 function spotifyIt() {
-    console.log("music")
     spotify.search({
         type: 'track',
-        query, //array literal version of query:query,
+        query, //array literal version of query:query
         limit: 1
     }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        let sdata = data.artists[0].name;
-        console.log(sdata)
-        console.log(data.tracks.items[0]);
-
         console.log(`the artist is ${data.tracks.items[0].artists[0].name}`);
-        //console.log(data.tracks.items[0]);
-        //console.log(JSON.stringify(data.tracks.items[0], null, 10));
+        console.log(`the song's name is ${data.tracks.items[0].name}`);
+        console.log(`the preview link of the song is ${data.tracks.items[0].preview_url}`);
+        console.log(`the album is from ${data.tracks.items[0].album.name}`);
     });
 
 }
@@ -90,44 +80,18 @@ function movieIt() {
         console.log(res.data.Plot);
         console.log(res.data.Actors);
     });
-
-
-    // console.log("watching")
-
 }
 
 function doIt() {
     fs.readFile('random.txt', (err, data) => {
         if (err) throw err;
-        console.log(data.toString().split("\n"));
-        console.log("doing")
+        // console.log(data.toString().split("\n"));
+        // console.log("doing")
+        let comArr = data.toString().split(",");
+        let com = comArr[0];
+        let com1 = comArr[1];
         // use fs to read the file
         // it will return a string, which we will .split(",")
         // call getUserInput()
     });
 }
-
-    // let car = {
-    //     make: "honda",
-    //     model: "civic"
-    // }
-
-    // let {
-    //     make,
-    //     model
-    // } = car
-    // console.log(`I drive a ${make} ${model}`)//object destructuring
-
-
-
-
-
-    // const movieTitle = () => {
-    //     const arguments = process.argv;
-    //     let argArr = [];
-    //     for (let i = 2; i < arguments.length; i++) {
-    //         argArr.push(arguments[i]);
-    //     }
-    //     return argArr.join("+");
-    // };
-    // module.exports = movieTitle;
