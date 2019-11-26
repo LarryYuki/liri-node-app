@@ -9,33 +9,52 @@
 - do-what-it says
 
 ## Technologies used:
+- Spotify API
+- OMDB API
+- Bands In Town API
 - Node.js
-- javascript
+- Javascript
+- NPM packages
 
-## How to Run Liri app
+## What Each Command Does
+### LIRI searches Bands in Town for concerts, Spotify for songs, and OMDB for movies.
 
-- Users can use terminal to input the commands above to get info
-- Exapmle: node liri.js spotify-this-song <song name here>
-- This will show the following information about the song in your terminal/bash window:
+- 1 node liri.js concert-this '<artist/band name here>'
 
-  * Artist(s)
-  * The song's name
-  * A preview link of the song from Spotify
-  * The album that the song is from
+- Searches the Bands in Town Artist Events API for an artist and renders     the following information about each event to the terminal:
+
+   - Name of the venue
+
+   - Venue location
+
+   - Date of the Event (using the format "MM/DD/YYYY")
+
+- 2 node liri.js spotify-this-song '<song name here>'
+
+- Displays the following information about the selected song in your         terminal/bash window
+
+  - Artist(s)
+  - The song's name
+  - A preview link of the song from Spotify
+  - The album containing the song
+  - If no song is provided, the program defaults to "The Sign" by Ace of Base.
+
+- 3 node liri.js movie-this '<movie name here>'
+
+  - This will output the following movie information to your terminal/bash window:
+
+  * Title
+  * Year movie was released
+  * IMDB Rating
+  * Country where movie was produced
+  * Language(s)
+  * Plot of the movie
+  * Actors in the movie
+
+ - 4 node liri.js do-what-it-says
+
+ - Runs spotify-this-song for "I Want it That Way".
 
   ## Maintain and Contributes
   - Larry Nan
 <!-- uncomment notes -->
-Clearly state the problem the app is trying to solve (i.e. what is it doing and why)
-Give a high-level overview of how the app is organized
-Give start-to-finish instructions on how to run the app
-Include screenshots, gifs or videos of the app functioning
-Contain a link to a deployed version of the app
-Clearly list the technologies used in the app
-State your role in the app development
-
-What the project does
-Why the project is useful
-How users can get started with the project
-Where users can get help with your project
-Who maintains and contributes to the project
